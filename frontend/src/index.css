@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+/* Manual dark mode: toggled via a `.dark` class on <html> instead of relying on prefers-color-scheme */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Primary blue — buttons, links, active nav, focus rings */
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
+
+  /* Live/real-time cyan accent */
+  --color-live-50: #e6f8fe;
+  --color-live-100: #ccf1fd;
+  --color-live-300: #66d4f7;
+  --color-live-400: #33c1f2;
+  --color-live-500: #00aeef;
+  --color-live-600: #008fc4;
+  --color-live-700: #00709a;
+
+  /* Neutral scale, navy-tinted at the dark end (sidebar / camera cards) */
+  --color-ink-50: #f5f7fa;
+  --color-ink-100: #e7ebf0;
+  --color-ink-200: #cbd3dc;
+  --color-ink-300: #9aa7b8;
+  --color-ink-400: #6b7889;
+  --color-ink-500: #47536a;
+  --color-ink-600: #2f3a4d;
+  --color-ink-700: #1c2635;
+  --color-ink-800: #111c2a;
+  --color-ink-900: #0d1520;
+
+  --font-sans: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-ink-50);
+  color: var(--color-ink-800);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+html.dark body {
+  background-color: var(--color-ink-900);
+  color: var(--color-ink-100);
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-ink-300);
+  border-radius: 9999px;
+}

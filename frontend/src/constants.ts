@@ -1,0 +1,37 @@
+import type { AiEventType, EventSeverity, IncidentPriority, IncidentStatus } from "./types";
+
+export const AI_EVENT_TYPES: AiEventType[] = [
+  "FACE_DETECTION",
+  "FACE_RECOGNITION",
+  "HUMAN_DETECTION",
+  "VEHICLE_DETECTION",
+  "VEHICLE_RECOGNITION",
+  "ANPR",
+  "CROWD_DENSITY",
+  "INTRUSION_DETECTION",
+  "LINE_CROSSING",
+  "OBJECT_ABANDONMENT",
+  "OBJECT_REMOVED",
+  "MOTION_DETECTION",
+  "LOITERING_DETECTION",
+  "FIRE_DETECTION",
+  "SMOKE_DETECTION",
+  "PPE_DETECTION",
+  "HELMET_DETECTION",
+  "VEHICLE_COUNTING",
+  "PEOPLE_COUNTING",
+  "QUEUE_ANALYTICS",
+  "HEAT_MAP",
+];
+
+export const EVENT_SEVERITIES: EventSeverity[] = ["LOW", "MEDIUM", "HIGH", "CRITICAL"];
+
+export const INCIDENT_STATUSES: IncidentStatus[] = [
+  "OPEN",
+  "ASSIGNED",
+  "INVESTIGATING",
+  "RESOLVED",
+  "CLOSED",
+];
+
+export const INCIDENT_PRIORITIES: IncidentPriority[] = ["LOW", "MEDIUM", "HIGH", "CRITICAL"];

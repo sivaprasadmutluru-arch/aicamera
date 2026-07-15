@@ -1,0 +1,40 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: video-analytics-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: video_analytics
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build: .
+    container_name: video-analytics-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/video_analytics
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      JWT_SECRET: ${JWT_SECRET:-ChangeMeInProduction2026}
+      DAHUA_BASE_URL: ${DAHUA_BASE_URL:-http://dahua-vms:9080}
+      DAHUA_USERNAME: ${DAHUA_USERNAME:-admin}
+      DAHUA_PASSWORD: ${DAHUA_PASSWORD:-admin}
+      DAHUA_ENABLED: ${DAHUA_ENABLED:-false}
+    ports:
+      - "8081:8081"
+
+volumes:
+  postgres_data:
