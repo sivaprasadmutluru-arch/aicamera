@@ -26,6 +26,12 @@ export const MonitorIcon = (p: SVGProps<SVGSVGElement>) => (
   </Icon>
 );
 
+export const MenuIcon = (p: SVGProps<SVGSVGElement>) => (
+  <Icon {...p}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M4 6.75h16M4 12h16M4 17.25h16" />
+  </Icon>
+);
+
 export const ChartIcon = (p: SVGProps<SVGSVGElement>) => (
   <Icon {...p}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M3 3v18h18M7 16v-4M12 16V8M17 16v-7" />

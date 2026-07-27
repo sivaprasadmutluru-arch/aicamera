@@ -6,6 +6,7 @@ import { useAuth } from "../context/AuthContext";
 import { ApiError } from "../api/client";
 import loginCameraAnimated from "../assets/login-camera-animated.png";
 import loginCityNetworkBg from "../assets/login-city-network-bg-v3.png";
+import elmntxLogo from "../assets/elmntx-logo.png";
 
 function MailIcon(props: SVGProps<SVGSVGElement>) {
   return (
@@ -157,11 +158,10 @@ export default function LoginPage() {
         <BackgroundArtwork />
         <section className="relative z-10 hidden min-h-screen flex-1 overflow-hidden p-10 text-white lg:flex lg:flex-col xl:p-14">
           <div className="relative z-10">
-            <div className="flex items-center gap-2">
-              <span className="text-4xl font-black italic tracking-tight text-primary-300 drop-shadow-[0_0_18px_rgba(59,130,246,0.55)]">a</span>
-              <span className="text-2xl font-black tracking-tight text-white drop-shadow-[0_8px_26px_rgba(0,0,0,0.35)]">VIDEO ANALYTICS</span>
+            <div className="inline-flex items-center rounded-lg bg-white/95 px-3 py-2 shadow-[0_8px_24px_rgba(0,0,0,0.25)]">
+              <img src={elmntxLogo} alt="ELMNTX" className="h-6 w-auto object-contain" />
             </div>
-            <p className="mt-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary-100/75">
+            <p className="mt-2 text-xs font-semibold uppercase tracking-[0.3em] text-primary-100/75">
               Enterprise Surveillance Dashboard
             </p>
           </div>
@@ -227,11 +227,8 @@ export default function LoginPage() {
           <div className="pointer-events-none absolute inset-y-10 left-0 w-56 rounded-full bg-primary-500/10 blur-3xl" />
           <div className="relative w-full max-w-[740px]">
             <div className="mb-8 flex flex-col items-center text-center lg:hidden">
-              <div className="flex items-center gap-2">
-                <span className="text-4xl font-black italic tracking-tight text-primary-500">a</span>
-                <span className="text-2xl font-black tracking-tight text-ink-900">VIDEO ANALYTICS</span>
-              </div>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-[0.22em] text-ink-400">
+              <img src={elmntxLogo} alt="ELMNTX" className="h-7 w-auto object-contain" />
+              <p className="mt-2 text-xs font-semibold uppercase tracking-[0.22em] text-ink-400">
                 Enterprise Surveillance Dashboard
               </p>
             </div>
@@ -357,8 +354,25 @@ export default function LoginPage() {
         </section>
       </main>
 
-      <p className="pointer-events-none absolute bottom-4 left-1/4 hidden -translate-x-1/2 text-center text-xs text-white/55 lg:block">
-        © 2024 AI Video Analytics Dashboard. All rights reserved.
+      <p className="absolute bottom-4 left-1/4 z-20 hidden -translate-x-1/2 text-center text-xs text-white/55 lg:block">
+        © 2024 AI Video Analytics Dashboard. All rights reserved. Crafted by{" "}
+        <a
+          href="https://prabhatech.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-violet-500 hover:text-violet-400 hover:underline"
+        >
+          Prabha Technologies
+        </a>{" "}
+        Est |{" "}
+        <a
+          href="https://prabhatech.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-violet-500 hover:text-violet-400 hover:underline"
+        >
+          prabhatech.com
+        </a>
       </p>
     </div>
   );

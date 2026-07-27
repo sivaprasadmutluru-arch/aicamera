@@ -26,6 +26,15 @@ const similarMatches = [
   { name: "Chris Wilson", match: "81%", color: "from-rose-200 to-slate-500" },
 ];
 
+const eventFallbackImages = [
+  "https://whitepapers.axis.com/image/t10171475.jpg",
+  "https://whitepapers.axis.com/image/t10171473.jpg",
+  "https://whitepapers.axis.com/image/t10171474.jpg",
+  "https://whitepapers.axis.com/image/t10171471.png",
+  "https://www.camvex.com.au/samples/images/thumbs/thumb1b.jpg",
+  "https://www.camvex.com.au/samples/images/thumbs/thumb2b.jpg",
+];
+
 function eventLabel(value: string) {
   return value.replaceAll("_", " ");
 }
@@ -47,6 +56,10 @@ function severityClass(severity: EventSeverity) {
 
 function confidenceFor(index: number) {
   return [92, 87, 89, 94, 77, 88, 84, 91, 80, 86][index % 10];
+}
+
+function snapshotImageFor(event?: AiEvent, index = 0) {
+  return event?.snapshotUrl || eventFallbackImages[index % eventFallbackImages.length];
 }
 
 function KpiCard({
@@ -91,21 +104,16 @@ function KpiCard({
 
 function Snapshot({ event, large = false, index = 0 }: { event?: AiEvent; large?: boolean; index?: number }) {
   const eventKind = event?.eventType ?? "FACE_RECOGNITION";
-  const isFace = eventKind.includes("FACE");
+  const imageUrl = snapshotImageFor(event, index);
 
   return (
     <div
-      className={`relative overflow-hidden rounded-md bg-gradient-to-br from-[#d6e2db] via-[#687d70] to-[#18251f] ${
+      className={`relative overflow-hidden rounded-md bg-gradient-to-br from-slate-800 via-slate-600 to-slate-900 ${
         large ? "h-[226px] w-full" : "h-14 w-20"
       }`}
     >
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,.12)_1px,transparent_1px),linear-gradient(0deg,rgba(255,255,255,.08)_1px,transparent_1px)] bg-[length:32px_32px]" />
-      <div className="absolute bottom-0 h-[32%] w-full bg-black/30" />
-      <div className={`absolute ${large ? "left-[42%] top-[24%] h-20 w-14" : "left-[42%] top-[24%] h-7 w-5"} rounded-full bg-[#d8b09a]`} />
-      <div className={`absolute ${large ? "left-[38%] top-[52%] h-24 w-24" : "left-[36%] top-[53%] h-9 w-9"} rounded-t-full bg-slate-900/75`} />
-      {isFace && (
-        <div className={`absolute border-2 border-emerald-400 ${large ? "left-[37%] top-[20%] h-[92px] w-[92px]" : "left-[34%] top-[17%] h-8 w-8"}`} />
-      )}
+      <img src={imageUrl} alt="" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,23,42,0.02),rgba(15,23,42,0.44))]" />
       {large && (
         <>
           <span className="absolute left-3 top-3 rounded bg-emerald-500 px-2 py-1 text-[10px] font-black text-white">

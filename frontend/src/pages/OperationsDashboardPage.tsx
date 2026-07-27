@@ -28,13 +28,14 @@ const peopleCountData = [
   { time: "24:00", visitors: 680, entries: 450, exits: 360 },
 ];
 
-const cameraScenes = [
-  "from-[#d7c2aa] via-[#efe2d2] to-[#9bb1b6]",
-  "from-[#c49d6c] via-[#f3d7a8] to-[#6f4b36]",
-  "from-[#dad7cf] via-[#e9ecec] to-[#b59c7a]",
-  "from-[#374151] via-[#64748b] to-[#15212f]",
-  "from-[#b58b5a] via-[#dec18f] to-[#6b4f36]",
-  "from-[#c9b594] via-[#e8dfd0] to-[#8a795e]",
+const cameraFallbackImages = [
+   "https://whitepapers.axis.com/image/t10171473.jpg",
+  "https://whitepapers.axis.com/image/t10171475.jpg",
+ 
+  "https://whitepapers.axis.com/image/t10171474.jpg",
+  "https://whitepapers.axis.com/image/t10171471.png",
+  "https://www.camvex.com.au/samples/images/thumbs/thumb1b.jpg",
+  "https://www.camvex.com.au/samples/images/thumbs/thumb2b.jpg",
 ];
 
 function formatTime(value?: string | null) {
@@ -89,21 +90,17 @@ function CameraFeed({ camera, index, onPlay }: { camera: Camera; index: number; 
           ⛶
         </button>
       </div>
-      <button onClick={onPlay} className={`relative block aspect-[2.25/1] w-full overflow-hidden bg-gradient-to-br ${cameraScenes[index % cameraScenes.length]}`}>
-        <div className="absolute inset-0 opacity-45">
-          <div className="absolute left-[8%] top-[18%] h-[70%] w-[17%] rounded-t-lg bg-white/25" />
-          <div className="absolute left-[30%] top-[12%] h-[76%] w-[12%] rounded-t-lg bg-black/15" />
-          <div className="absolute left-[48%] top-[24%] h-[60%] w-[16%] rounded-t-lg bg-white/20" />
-          <div className="absolute left-[70%] top-[16%] h-[70%] w-[18%] rounded-t-lg bg-black/20" />
-          <div className="absolute bottom-0 left-0 h-[28%] w-full bg-black/25" />
-          {Array.from({ length: 14 }).map((_, person) => (
-            <span
-              key={person}
-              className="absolute h-4 w-1.5 rounded-full bg-black/35"
-              style={{ left: `${10 + ((person * 6) % 78)}%`, top: `${48 + ((person * 11) % 34)}%` }}
-            />
-          ))}
-        </div>
+      <button onClick={onPlay} className="relative block aspect-video w-full overflow-hidden bg-gradient-to-br from-slate-800 via-slate-600 to-slate-900">
+        <img
+          src={cameraFallbackImages[index % cameraFallbackImages.length]}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,23,42,0.08),rgba(15,23,42,0.38))]" />
+        <span className="absolute left-2 top-2 rounded bg-black/55 px-2 py-1 text-[10px] font-black uppercase tracking-wide text-white">
+          CAM {String(index + 1).padStart(2, "0")}
+        </span>
         <span className="absolute bottom-2 right-2 rounded bg-white/90 px-2 py-1 text-[10px] font-black text-[#111827]">
           {formatTime(camera.lastHeartbeatAt)}
         </span>
@@ -170,7 +167,7 @@ export default function OperationsDashboardPage() {
           {data.cameras.length === 0 ? (
             <EmptyBlock message="No cameras registered yet." />
           ) : (
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 2xl:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 2xl:grid-cols-3">
               {data.cameras.slice(0, 6).map((camera, index) => (
                 <CameraFeed
                   key={camera.id}

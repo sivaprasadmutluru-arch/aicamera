@@ -5,7 +5,7 @@ import { useTheme } from "../context/ThemeContext";
 import { useRealtime } from "../hooks/useRealtime";
 import type { RealtimeNotification } from "../hooks/useRealtime";
 import Button from "./Button";
-import { BellIcon, LogoutIcon, MoonIcon, SunIcon } from "./icons";
+import { BellIcon, LogoutIcon, MenuIcon, MoonIcon, SunIcon } from "./icons";
 import Modal from "./Modal";
 
 const PAGE_TITLES: Record<string, string> = {
@@ -73,7 +73,13 @@ function NotificationRow({
   );
 }
 
-export default function Topbar() {
+export default function Topbar({
+  sidebarOpen,
+  onToggleSidebar,
+}: {
+  sidebarOpen: boolean;
+  onToggleSidebar: () => void;
+}) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -102,6 +108,14 @@ export default function Topbar() {
   return (
     <header className="h-[74px] shrink-0 bg-white dark:bg-ink-800 border-b border-[#edf1f7] dark:border-ink-700 flex items-center justify-between gap-5 px-6">
       <div className="flex items-center gap-3">
+        <button
+          onClick={onToggleSidebar}
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[#dbe3ef] bg-white text-ink-500 shadow-[0_6px_16px_rgba(15,23,42,0.03)] transition-all duration-200 hover:border-[#1167ee] hover:text-[#1167ee] hover:shadow-[0_8px_20px_rgba(17,103,238,0.12)] active:scale-95 dark:border-ink-700 dark:bg-ink-800 dark:text-ink-300"
+          aria-label={sidebarOpen ? "Close sidebar" : "Open sidebar"}
+          title={sidebarOpen ? "Close sidebar" : "Open sidebar"}
+        >
+          <MenuIcon className="h-5 w-5" />
+        </button>
         <div>
           <h1 className="text-[17px] font-bold text-[#111827] dark:text-ink-100">{title}</h1>
           <p className="text-xs text-ink-400">Overview of your system</p>

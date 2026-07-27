@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import type { ComponentType } from "react";
+import elmntxLogo from "../assets/elmntx-logo.png";
 import { useAuth } from "../context/AuthContext";
 import type { Role } from "../types";
 import {
@@ -38,13 +39,8 @@ export default function Sidebar() {
 
   return (
     <aside className="w-[218px] shrink-0 bg-white text-ink-600 flex flex-col h-screen sticky top-0 border-r border-[#edf1f7] shadow-[6px_0_24px_rgba(17,24,39,0.03)]">
-      <div className="h-[74px] flex items-center gap-2 px-6 border-b border-[#edf1f7]">
-        <span className="text-3xl font-black italic text-[#1683ff] leading-none">P</span>
-        <span className="text-[#111827] font-black tracking-tight text-[13px] leading-tight">
-          PRABHA
-          <br />
-          <span className="text-[9px] font-semibold tracking-[0.32em] text-ink-400">TECHNOLOGIES</span>
-        </span>
+      <div className="h-[96px] flex items-center justify-center px-3 border-b border-[#edf1f7]">
+        <img src={elmntxLogo} alt="ELMNTX" className="h-10 w-auto object-contain" />
       </div>
 
       <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-1.5">
